@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RMEpisode: Decodable {
+struct RMEpisode: Codable {
     let id: Int
     let name: String
     let air_date: String

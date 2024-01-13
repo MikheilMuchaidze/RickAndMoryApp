@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RMOrigin: Decodable {
+struct RMOrigin: Codable {
     let name: String
     let url: String
 }
