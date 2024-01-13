@@ -15,10 +15,15 @@ final class RMRequest {
     }
     /// Desired endpoint
     private let endpoint: RMEndpoint
+    
     /// Path components to API if any
-    private let pathCompoenets: Set<String>
+    private let pathCompoenets: [String]
+    
     /// Qeury parameters to API if any
     private let queryParameters: [URLQueryItem]
+    
+    /// Desired http method
+    public let httpMethod = "GET"
     
     /// Constructed url for the api request in string format
     private var urlString: String {
@@ -39,9 +44,6 @@ final class RMRequest {
         return string
     }
     
-    /// Desired http method
-    public let httpMethod = "GET"
-    
     /// Computed & constructed url
     public var url: URL? {
         URL(string: urlString)
@@ -54,11 +56,15 @@ final class RMRequest {
     ///   - queryParameters: Collection of query parameters
     public init(
         endpoint: RMEndpoint,
-        pathCompoenets: Set<String> = [],
+        pathCompoenets:[String] = [],
         queryParameters: [URLQueryItem] = []
     ) {
         self.endpoint = endpoint
         self.pathCompoenets = pathCompoenets
         self.queryParameters = queryParameters
     }
+}
+
+extension RMRequest {
+    static let listCharactersRequest = RMRequest(endpoint: .character)
 }
