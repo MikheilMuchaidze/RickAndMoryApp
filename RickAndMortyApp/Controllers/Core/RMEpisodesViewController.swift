@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Controller to show and search episodes
 final class RMEpisodesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// Controller to house tabs and root tab controllers
 final class RMtabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,31 +15,31 @@ final class RMtabBarController: UITabBarController {
     }
     
     private func setupTabs() {
-        let locationsVC = RMLocationViewController()
         let charactersVC = RMCharacterViewController()
+        let locationsVC = RMLocationViewController()
         let episodesVC = RMEpisodesViewController()
         let settingsVC = RMSettingsViewController()
         
-        locationsVC.navigationItem.largeTitleDisplayMode = .automatic
         charactersVC.navigationItem.largeTitleDisplayMode = .automatic
+        locationsVC.navigationItem.largeTitleDisplayMode = .automatic
         episodesVC.navigationItem.largeTitleDisplayMode = .automatic
         settingsVC.navigationItem.largeTitleDisplayMode = .automatic
         
-        let locationsNav = UINavigationController(rootViewController: locationsVC)
         let characterNav = UINavigationController(rootViewController: charactersVC)
+        let locationsNav = UINavigationController(rootViewController: locationsVC)
         let episodeNav = UINavigationController(rootViewController: episodesVC)
         let settingsNav = UINavigationController(rootViewController: settingsVC)
-        
-        locationsNav.tabBarItem = UITabBarItem(
-            title: "Location",
-            image: UIImage(systemName: "globe"),
-            tag: 1
-        )
         
         characterNav.tabBarItem = UITabBarItem(
             title: "Characters",
             image: UIImage(systemName: "person"),
             tag: 2
+        )
+        
+        locationsNav.tabBarItem = UITabBarItem(
+            title: "Location",
+            image: UIImage(systemName: "globe"),
+            tag: 1
         )
         
         episodeNav.tabBarItem = UITabBarItem(
@@ -53,14 +54,14 @@ final class RMtabBarController: UITabBarController {
             tag: 4
         )
         
-        for nav in [locationsNav, characterNav, episodeNav, settingsNav] {
+        for nav in [characterNav, locationsNav, episodeNav, settingsNav] {
             nav.navigationBar.prefersLargeTitles = true
         }
         
         setViewControllers(
             [
-                locationsNav,
                 characterNav,
+                locationsNav,
                 episodeNav,
                 settingsNav
             ],
