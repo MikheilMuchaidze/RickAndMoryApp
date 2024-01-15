@@ -34,6 +34,7 @@ final class RMCharacterListViewViewModel: NSObject {
         apiInfo?.next != nil
     }
     private var apiInfo: RMGetAllCharacterResponse.RMGetAllCharacterResponseInfo? = nil
+    private var isLoadingMore = false
     
     // MARK: - Delegate
     
@@ -65,11 +66,12 @@ final class RMCharacterListViewViewModel: NSObject {
     
     /// Paginate if additional characters are needed
     public func fetchAdditionalCharacters() {
+        isLoadingMore = true
         // MARK: - Fetch additional characters here
     }
 }
 
-// MARK: - UICollectionViewDataSource
+// MARK: - UICollectionViewDataSource & general cell deqeue
 
 extension RMCharacterListViewViewModel: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -88,6 +90,29 @@ extension RMCharacterListViewViewModel: UICollectionViewDataSource {
     }
 }
 
+// MARK: - CollectionView footer cell deqeue
+
+extension RMCharacterListViewViewModel {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard kind == UICollectionView.elementKindSectionFooter, let footer = collectionView.dequeueReusableSupplementaryView(
+            ofKind: kind,
+            withReuseIdentifier: RMFooterLoadingCollectionReusableView.cellIdentifier,
+            for: indexPath
+        ) as? RMFooterLoadingCollectionReusableView else {
+            fatalError("Unsupported")
+        }
+
+        footer.startAnimating()
+        return footer
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        guard shouldShowLoadMoreIndicator else { return .zero }
+        
+        return CGSizeMake(collectionView.frame.width, 100)
+    }
+}
+
 // MARK: - UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 
 extension RMCharacterListViewViewModel: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -99,7 +124,11 @@ extension RMCharacterListViewViewModel: UICollectionViewDelegate, UICollectionVi
             height: width * 1.5
         )
     }
-    
+}
+
+// MARK: - CollectionView didselect
+
+extension RMCharacterListViewViewModel {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         let character = characters[indexPath.row]
@@ -111,7 +140,14 @@ extension RMCharacterListViewViewModel: UICollectionViewDelegate, UICollectionVi
 
 extension RMCharacterListViewViewModel: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard shouldShowLoadMoreIndicator else { return }
+        guard shouldShowLoadMoreIndicator, !isLoadingMore else { return }
+        
+        let offset = scrollView.contentOffset.y
+        let totalContentHeight = scrollView.contentSize.height
+        let totalScrollViewHeight = scrollView.frame.size.height
+        
+        if offset >= (totalContentHeight - totalScrollViewHeight - 120) {
+            fetchAdditionalCharacters()
+        }
     }
 }
-
