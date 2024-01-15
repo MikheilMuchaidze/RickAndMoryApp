@@ -6,6 +6,12 @@
 //
 
 import UIKit
+protocol RMCharacterListViewDelegate: AnyObject {
+    func rmCharacterListView(
+        _ characterListView: RMCharacterListView,
+        didSelectCharacter character: RMCharacter
+    )
+}
 
 /// View that handles showing  list of characters, loader, etc.
 final class RMCharacterListView: UIView {
@@ -24,7 +30,7 @@ final class RMCharacterListView: UIView {
         layout.sectionInset = UIEdgeInsets(
             top: 0,
             left: 10,
-            bottom: 0,
+            bottom: 10,
             right: 10
         )
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -37,6 +43,10 @@ final class RMCharacterListView: UIView {
         )
         return collectionView
     }()
+    
+    // MARK: - Delegate
+    
+    weak var delegate: RMCharacterListViewDelegate?
     
     // MARK: - Init
     
@@ -87,5 +97,9 @@ extension RMCharacterListView: RMCharacterListViewViewModelDelegate {
         UIView.animate(withDuration: 0.4) {
             self.collectionView.alpha = 1
         }
+    }
+    
+    func didSelectCharacter(_ character: RMCharacter) {
+        delegate?.rmCharacterListView(self, didSelectCharacter: character)
     }
 }
