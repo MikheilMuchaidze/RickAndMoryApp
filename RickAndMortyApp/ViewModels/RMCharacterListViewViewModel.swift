@@ -8,12 +8,13 @@
 import UIKit
 
 final class RMCharacterListViewViewModel: NSObject {
-    func fetchCharacters() {
+    // MARK: - Public Methods
+
+    public func fetchCharacters() {
         RMService.shared.execute(.listCharactersRequest, expecting: RMGetAllCharacterResponse.self) { result in
             switch result {
             case .success(let model):
-                print("Total: "+String(model.info.count))
-                print("PAge resul count: "+String(model.results.count))
+                print("Example image url: "+String(model.results.first?.image ?? "No image"))
             case .failure(let error):
                 print(String(describing: error))
             }
@@ -21,17 +22,30 @@ final class RMCharacterListViewViewModel: NSObject {
     }
 }
 
+// MARK: - UICollectionViewDataSource
+
 extension RMCharacterListViewViewModel: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .red
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier,
+            for: indexPath
+        ) as? RMCharacterCollectionViewCell else {
+            fatalError("Unsupported cell")
+        }
+        cell.configure(RMCharacterCollectionViewCellViewModel(
+            characterName: "Misha",
+            characterStatus: .alive,
+            characterImageUrl: URL(string: "https://rickandmortyapi.com/api/character/avatar/1.jpeg")
+        ))
         return cell
     }
 }
+
+// MARK: - UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 
 extension RMCharacterListViewViewModel: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

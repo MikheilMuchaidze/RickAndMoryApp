@@ -9,13 +9,20 @@ import UIKit
 
 /// Controller to show and search characters
 final class RMCharacterViewController: UIViewController {
+    // MARK: - Private Properties
+    
     private let characterListView = RMCharacterListView()
+    
+    // MARK: - Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Characters"
+        setupView()
     }
+    
+    // MARK: - Private Merthods
     
     private func setupView() {
         view.addSubview(characterListView)

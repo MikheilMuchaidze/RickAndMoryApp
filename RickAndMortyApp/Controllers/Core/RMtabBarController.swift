@@ -9,10 +9,14 @@ import UIKit
 
 /// Controller to house tabs and root tab controllers
 final class RMtabBarController: UITabBarController {
+    // MARK: - Init
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabs()
     }
+    
+    // MARK: - Private Methods
     
     private func setupTabs() {
         let charactersVC = RMCharacterViewController()

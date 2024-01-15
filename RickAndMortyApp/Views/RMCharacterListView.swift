@@ -32,8 +32,8 @@ final class RMCharacterListView: UIView {
         collectionView.alpha = 0
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.register(
-            UICollectionViewCell.self,
-            forCellWithReuseIdentifier: "cell"
+            RMCharacterCollectionViewCell.self,
+            forCellWithReuseIdentifier: RMCharacterCollectionViewCell.cellIdentifier
         )
         return collectionView
     }()
@@ -53,6 +53,8 @@ final class RMCharacterListView: UIView {
     required init?(coder: NSCoder) {
         fatalError("Unsupported")
     }
+    
+    // MARK: - Private Methods
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
