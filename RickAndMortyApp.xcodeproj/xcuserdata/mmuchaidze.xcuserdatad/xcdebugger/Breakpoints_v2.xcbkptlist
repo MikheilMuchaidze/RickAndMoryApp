@@ -3,4 +3,54 @@
    uuid = "15BBF290-38ED-4F03-BD05-7532A322FC2B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A43D358F-1A6B-41E6-AC15-5B5F1A7281ED"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RickAndMortyApp/ViewModels/RMCharacterListViewViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "getIndexForInsertion(results:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A43D358F-1A6B-41E6-AC15-5B5F1A7281ED - 844b2dde4431c8e5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RickAndMortyApp.RMCharacterListViewViewModel.getIndexForInsertion(results: Swift.Array&lt;RickAndMortyApp.RMCharacter&gt;) -&gt; Swift.Array&lt;Foundation.IndexPath&gt;"
+                  moduleName = "RickAndMortyApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmuchaidze/Desktop/LearningProject/RickAndMortyApp/RickAndMortyApp/ViewModels/RMCharacterListViewViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "420">
+               </Location>
+               <Location
+                  uuid = "A43D358F-1A6B-41E6-AC15-5B5F1A7281ED - 30d8fe91834b6ea3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Int) -&gt; Swift.Optional&lt;Foundation.IndexPath&gt; in RickAndMortyApp.RMCharacterListViewViewModel.getIndexForInsertion(results: Swift.Array&lt;RickAndMortyApp.RMCharacter&gt;) -&gt; Swift.Array&lt;Foundation.IndexPath&gt;"
+                  moduleName = "RickAndMortyApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmuchaidze/Desktop/LearningProject/RickAndMortyApp/RickAndMortyApp/ViewModels/RMCharacterListViewViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
