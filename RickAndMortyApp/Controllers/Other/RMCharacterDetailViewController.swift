@@ -12,6 +12,7 @@ final class RMCharacterDetailViewController: UIViewController {
     // MARK: - Private Properties
     
     private let viewModel: RMCharacterDetailViewViewModel
+    private let detailView = RMCharacterDetailView()
     
     // MARK: - Init
     
@@ -31,5 +32,30 @@ final class RMCharacterDetailViewController: UIViewController {
         view.backgroundColor = .systemBackground
         title = viewModel.title
         navigationItem.largeTitleDisplayMode = .never
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(didTapShare)
+        )
+        setupView()
+    }
+    
+    // MARK: - ObjC Methods
+
+    @objc
+    private func didTapShare() {
+        // MARK: - Share character info
+    }
+    
+    // MARK: - Private Merthods
+    
+    private func setupView() {
+        view.addSubViews(detailView)
+        NSLayoutConstraint.activate([
+            detailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            detailView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            detailView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
 }

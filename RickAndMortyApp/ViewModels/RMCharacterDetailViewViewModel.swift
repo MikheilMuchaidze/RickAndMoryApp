@@ -11,6 +11,9 @@ final class RMCharacterDetailViewViewModel {
     // MARK: - Private Properties
     
     private let character: RMCharacter
+    private var requestUrl: URL? {
+        URL(string: character.url)
+    }
     
     // MARK: - Public Properties
     
