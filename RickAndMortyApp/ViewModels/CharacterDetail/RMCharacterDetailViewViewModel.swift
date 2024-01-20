@@ -20,17 +20,40 @@ final class RMCharacterDetailViewViewModel {
     public var title: String {
         character.name.uppercased()
     }
-    public enum SectionType: CaseIterable {
-        case photo
-        case information
-        case episodes
+    public enum SectionType {
+        case photo(viewModel: RMCharacterPhotoCollectionViewCellViewModel)
+        case information(viewModels: [RMCharacterInfoCollectionViewCellViewModel])
+        case episodes(viewModels: [RMCharacterEpisodeCollectionViewCellViewModel])
     }
-    public let sections = SectionType.allCases
+    public var sections: [SectionType] = []
     
     // MARK: - Init
     
     init(character: RMCharacter) {
         self.character = character
+        setupSections()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupSections() {
+        sections = [
+            .photo(viewModel: .init()),
+            .information(viewModels: [
+                .init(),
+                .init(),
+                .init(),
+                .init(),
+                .init()
+            ]),
+            .episodes(viewModels: [
+                .init(),
+                .init(),
+                .init(),
+                .init(),
+                .init()
+            ])
+        ]
     }
     
     // MARK: - Public Properties
