@@ -2,7 +2,7 @@
 //  RMLocationViewController.swift
 //  RickAndMortyApp
 //
-//  Created by mmuchaidze on 13.01.24.
+//  Created by Mikheil Muchaidze on 13.01.24.
 //
 
 import UIKit

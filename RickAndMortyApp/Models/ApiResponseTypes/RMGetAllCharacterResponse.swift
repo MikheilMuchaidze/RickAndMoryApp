@@ -2,7 +2,7 @@
 //  RMGetAllCharacterResponse.swift
 //  RickAndMortyApp
 //
-//  Created by mmuchaidze on 14.01.24.
+//  Created by Mikheil Muchaidze on 14.01.24.
 //
 
 import Foundation

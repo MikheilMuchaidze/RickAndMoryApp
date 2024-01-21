@@ -2,7 +2,7 @@
 //  RickAndMortyAppTests.swift
 //  RickAndMortyAppTests
 //
-//  Created by mmuchaidze on 12.01.24.
+//  Created by Mikheil Muchaidze on 12.01.24.
 //
 
 import XCTest
