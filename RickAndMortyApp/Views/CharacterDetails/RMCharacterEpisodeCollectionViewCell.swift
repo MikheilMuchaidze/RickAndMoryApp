@@ -20,6 +20,8 @@ final class RMCharacterEpisodeCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .tertiarySystemBackground
         contentView.layer.cornerRadius = 8
         addConstraints()
+        addDefaultShadows()
+        registerForTraitChanges(traitsToListenWhenChanged, action: #selector(configureView))
     }
     
     required init?(coder: NSCoder) {
@@ -28,6 +30,13 @@ final class RMCharacterEpisodeCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+    }
+    
+    // MARK: - ObjC Methods
+    
+    @objc
+    private func configureView() {
+        addDefaultShadows()
     }
     
     // MARK: - Private Methods

@@ -91,9 +91,9 @@ final class RMCharacterDetailViewViewModel {
         )
         item.contentInsets = NSDirectionalEdgeInsets(
             top: 0,
-            leading: 0,
+            leading: 10,
             bottom: 10,
-            trailing: 0
+            trailing: 10
         )
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
@@ -114,9 +114,9 @@ final class RMCharacterDetailViewViewModel {
             )
         )
         item.contentInsets = NSDirectionalEdgeInsets(
-            top: 5,
+            top: 10,
             leading: 0,
-            bottom: 5,
+            bottom: 10,
             trailing: 0
         )
         let group = NSCollectionLayoutGroup.horizontal(
@@ -128,6 +128,8 @@ final class RMCharacterDetailViewViewModel {
         )
         group.interItemSpacing = .fixed(10)
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets.leading = 10
+        section.contentInsets.trailing = 10
         return section
     }
     
@@ -140,9 +142,9 @@ final class RMCharacterDetailViewViewModel {
         )
         item.contentInsets = NSDirectionalEdgeInsets(
             top: 10,
-            leading: 0,
+            leading: 10,
             bottom: 10,
-            trailing: 8
+            trailing: 10
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(

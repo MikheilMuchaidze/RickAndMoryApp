@@ -25,14 +25,12 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
     private let valueLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Earth"
         label.font = .systemFont(ofSize: 22, weight: .light)
         return label
     }()
     private let titleLabel: UILabel = {
         let titleLabel = UILabel()
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Location"
         titleLabel.textAlignment = .center
         titleLabel.font = .systemFont(ofSize: 20, weight: .medium)
         return titleLabel
@@ -40,7 +38,6 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
     private let iconImageView: UIImageView = {
         let iconImageView = UIImageView()
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        iconImageView.image = UIImage(systemName: "globe.americas")
         iconImageView.contentMode = .scaleAspectFit
         return iconImageView
     }()
@@ -55,6 +52,8 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
         contentView.addSubViews(titleContainerView, valueLabel, iconImageView)
         titleContainerView.addSubview(titleLabel)
         addConstraints()
+        addDefaultShadows()
+        registerForTraitChanges(traitsToListenWhenChanged, action: #selector(configureView))
     }
     
     required init?(coder: NSCoder) {
@@ -63,9 +62,16 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-//        valueLabel.text = nil
-//        titleLabel.text = nil
-//        iconImageView.image = nil
+        valueLabel.text = nil
+        titleLabel.text = nil
+        iconImageView.image = nil
+    }
+    
+    // MARK: - ObjC Methods
+    
+    @objc
+    private func configureView() {
+        addDefaultShadows()
     }
     
     // MARK: - Private Methods
@@ -90,7 +96,7 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
             valueLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 10),
             valueLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
             valueLabel.heightAnchor.constraint(equalToConstant: 30),
-            valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 36),
+            valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 35),
         ])
     }
     

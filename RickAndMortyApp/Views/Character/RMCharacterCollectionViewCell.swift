@@ -43,16 +43,13 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         return statusLabel
     }()
-    private let traitsToListenWhenChanged: [UITrait] = [
-        UITraitUserInterfaceStyle.self
-    ]
     
     // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubViews(imageView, nameLabel, statusLabel)
-        setupLayer()
+        addDefaultShadows()
         addConstraints()
         registerForTraitChanges(traitsToListenWhenChanged, action: #selector(configureView))
     }
@@ -72,19 +69,10 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
     
     @objc
     private func configureView() {
-        setupLayer()
+        addDefaultShadows()
     }
     
     // MARK: - Private Methods
-    
-    private func setupLayer() {
-        contentView.backgroundColor = .secondarySystemBackground
-        contentView.layer.cornerRadius = 8
-        contentView.layer.shadowColor = UIColor.label.cgColor
-        contentView.layer.shadowRadius = 4
-        contentView.layer.shadowOffset = CGSize(width: -4, height: 4)
-        contentView.layer.shadowOpacity = 0.3
-    }
     
     private func addConstraints() {
         NSLayoutConstraint.activate([

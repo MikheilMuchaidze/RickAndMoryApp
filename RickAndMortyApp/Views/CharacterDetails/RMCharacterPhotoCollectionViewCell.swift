@@ -30,6 +30,8 @@ final class RMCharacterPhotoCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(imageView)
         addConstraints()
+        addDefaultShadows()
+        registerForTraitChanges(traitsToListenWhenChanged, action: #selector(configureView))
     }
     
     required init?(coder: NSCoder) {
@@ -39,6 +41,13 @@ final class RMCharacterPhotoCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
+    }
+    
+    // MARK: - ObjC Methods
+    
+    @objc
+    private func configureView() {
+        addDefaultShadows()
     }
     
     // MARK: - Private Methods
