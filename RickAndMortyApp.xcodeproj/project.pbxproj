@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		2F0BF9E02B655B2500CEB593 /* RMEpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0BF9DF2B655B2500CEB593 /* RMEpisodeDetailViewController.swift */; };
+		2F0BF9E22B6565B100CEB593 /* RMAPICacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0BF9E12B6565B100CEB593 /* RMAPICacheManager.swift */; };
+		2F0BF9E42B656A4300CEB593 /* RMEpisodeDetailViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0BF9E32B656A4300CEB593 /* RMEpisodeDetailViewViewModel.swift */; };
+		2F0BF9E62B656AB400CEB593 /* RMEpisodeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0BF9E52B656AB400CEB593 /* RMEpisodeDetailView.swift */; };
 		2F7821D02B517B68003ABCCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7821CF2B517B68003ABCCC /* AppDelegate.swift */; };
 		2F7821D22B517B68003ABCCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7821D12B517B68003ABCCC /* SceneDelegate.swift */; };
 		2F7821D42B517B68003ABCCC /* RMtabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7821D32B517B68003ABCCC /* RMtabBarController.swift */; };
@@ -68,6 +71,9 @@
 
 /* Begin PBXFileReference section */
 		2F0BF9DF2B655B2500CEB593 /* RMEpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeDetailViewController.swift; sourceTree = "<group>"; };
+		2F0BF9E12B6565B100CEB593 /* RMAPICacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMAPICacheManager.swift; sourceTree = "<group>"; };
+		2F0BF9E32B656A4300CEB593 /* RMEpisodeDetailViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeDetailViewViewModel.swift; sourceTree = "<group>"; };
+		2F0BF9E52B656AB400CEB593 /* RMEpisodeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeDetailView.swift; sourceTree = "<group>"; };
 		2F7821CC2B517B68003ABCCC /* RickAndMortyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F7821CF2B517B68003ABCCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F7821D12B517B68003ABCCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -214,6 +220,7 @@
 				2FFA12C62B5BF9C800468709 /* Character */,
 				2FFA12C52B5BF98F00468709 /* CharacterDetails */,
 				2F8505E02B55663900EF767C /* RMFooterLoadingCollectionReusableView.swift */,
+				2F0BF9E52B656AB400CEB593 /* RMEpisodeDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,6 +230,7 @@
 			children = (
 				2FFA12CE2B5BFA7B00468709 /* Character */,
 				2FFA12CD2B5BFA6800468709 /* CharacterDetail */,
+				2F0BF9E32B656A4300CEB593 /* RMEpisodeDetailViewViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -241,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				2F8505E22B56B51B00EF767C /* RMImageLoader.swift */,
+				2F0BF9E12B6565B100CEB593 /* RMAPICacheManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -498,12 +507,15 @@
 				2F7822072B517EA8003ABCCC /* RMLocation.swift in Sources */,
 				2F78222A2B544A3A003ABCCC /* RMCharacterListView.swift in Sources */,
 				2F0BF9E02B655B2500CEB593 /* RMEpisodeDetailViewController.swift in Sources */,
+				2F0BF9E62B656AB400CEB593 /* RMEpisodeDetailView.swift in Sources */,
 				2F78221A2B52F609003ABCCC /* RMEndpoint.swift in Sources */,
 				2F7937EA2B5462B600B42CF6 /* RMCharacterCollectionViewCellViewModel.swift in Sources */,
 				2F7822092B517F05003ABCCC /* RMCharacter.swift in Sources */,
 				2F7822182B52F587003ABCCC /* RMRequest.swift in Sources */,
 				2FFA12CC2B5BFA1100468709 /* RMCharacterEpisodeCollectionViewCell.swift in Sources */,
 				2F78220E2B52E935003ABCCC /* RMCharacterViewController.swift in Sources */,
+				2F0BF9E22B6565B100CEB593 /* RMAPICacheManager.swift in Sources */,
+				2F0BF9E42B656A4300CEB593 /* RMEpisodeDetailViewViewModel.swift in Sources */,
 				2F8505DD2B555BC600EF767C /* RMCharacterDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
