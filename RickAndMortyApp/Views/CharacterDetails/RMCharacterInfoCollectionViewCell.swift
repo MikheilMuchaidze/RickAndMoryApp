@@ -26,6 +26,7 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 22, weight: .light)
+        label.numberOfLines = .zero
         return label
     }()
     private let titleLabel: UILabel = {
@@ -64,7 +65,9 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         valueLabel.text = nil
         titleLabel.text = nil
+        titleLabel.textColor = .label
         iconImageView.image = nil
+        iconImageView.tintColor = .label
     }
     
     // MARK: - ObjC Methods
@@ -90,19 +93,23 @@ final class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
             
             iconImageView.heightAnchor.constraint(equalToConstant: 30),
             iconImageView.widthAnchor.constraint(equalToConstant: 30),
-            iconImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 35),
+            iconImageView.centerYAnchor.constraint(equalTo: valueLabel.centerYAnchor),
             iconImageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20),
             
             valueLabel.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 10),
             valueLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
-            valueLabel.heightAnchor.constraint(equalToConstant: 30),
-            valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 35),
+            valueLabel.bottomAnchor.constraint(equalTo: titleContainerView.topAnchor),
+            valueLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
         ])
     }
     
     // MARK: - Public Methods
     
     public func configure(_ viewModel: RMCharacterInfoCollectionViewCellViewModel) {
-        
+        titleLabel.text = viewModel.title
+        titleLabel.textColor = viewModel.tintColor
+        valueLabel.text = viewModel.displayValue
+        iconImageView.image = viewModel.iconImage
+        iconImageView.tintColor = viewModel.tintColor
     }
 }
