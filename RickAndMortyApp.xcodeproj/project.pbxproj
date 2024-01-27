@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F0BF9E02B655B2500CEB593 /* RMEpisodeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F0BF9DF2B655B2500CEB593 /* RMEpisodeDetailViewController.swift */; };
 		2F7821D02B517B68003ABCCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7821CF2B517B68003ABCCC /* AppDelegate.swift */; };
 		2F7821D22B517B68003ABCCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7821D12B517B68003ABCCC /* SceneDelegate.swift */; };
 		2F7821D42B517B68003ABCCC /* RMtabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7821D32B517B68003ABCCC /* RMtabBarController.swift */; };
@@ -66,6 +67,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F0BF9DF2B655B2500CEB593 /* RMEpisodeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMEpisodeDetailViewController.swift; sourceTree = "<group>"; };
 		2F7821CC2B517B68003ABCCC /* RickAndMortyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F7821CF2B517B68003ABCCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F7821D12B517B68003ABCCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			isa = PBXGroup;
 			children = (
 				2F8505DA2B555AA600EF767C /* RMCharacterDetailViewController.swift */,
+				2F0BF9DF2B655B2500CEB593 /* RMEpisodeDetailViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				2F7822162B52F573003ABCCC /* RMService.swift in Sources */,
 				2F7822072B517EA8003ABCCC /* RMLocation.swift in Sources */,
 				2F78222A2B544A3A003ABCCC /* RMCharacterListView.swift in Sources */,
+				2F0BF9E02B655B2500CEB593 /* RMEpisodeDetailViewController.swift in Sources */,
 				2F78221A2B52F609003ABCCC /* RMEndpoint.swift in Sources */,
 				2F7937EA2B5462B600B42CF6 /* RMCharacterCollectionViewCellViewModel.swift in Sources */,
 				2F7822092B517F05003ABCCC /* RMCharacter.swift in Sources */,
