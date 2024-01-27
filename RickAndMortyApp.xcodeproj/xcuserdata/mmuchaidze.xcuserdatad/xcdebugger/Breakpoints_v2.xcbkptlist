@@ -84,5 +84,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "70422611-6A9A-4274-85D8-BB0E3E3078D2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RickAndMortyApp/Views/CharacterDetails/RMCharacterEpisodeCollectionViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "addConstraints()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "70422611-6A9A-4274-85D8-BB0E3E3078D2 - 85a1c20a5c4e07c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RickAndMortyApp.RMCharacterEpisodeCollectionViewCell.addConstraints() -&gt; ()"
+                  moduleName = "RickAndMortyApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmuchaidze/Desktop/LearningProject/RickAndMortyApp/RickAndMortyApp/Views/CharacterDetails/RMCharacterEpisodeCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "232">
+               </Location>
+               <Location
+                  uuid = "70422611-6A9A-4274-85D8-BB0E3E3078D2 - 85a1c20a5c4e07c3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RickAndMortyApp.RMCharacterEpisodeCollectionViewCell.addConstraints() -&gt; ()"
+                  moduleName = "RickAndMortyApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmuchaidze/Desktop/LearningProject/RickAndMortyApp/RickAndMortyApp/Views/CharacterDetails/RMCharacterEpisodeCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "57"
+                  endingLineNumber = "57"
+                  offsetFromSymbolStart = "236">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
