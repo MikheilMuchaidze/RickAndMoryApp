@@ -14,7 +14,13 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
     static let cellIdentifier = "RMCharacterCollectionViewCell"
     
     // MARK: - Private Properties
-
+    
+    private let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.hidesWhenStopped = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -49,6 +55,7 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         contentView.addSubViews(imageView, nameLabel, statusLabel)
+        imageView.addSubview(spinner)
         addDefaultShadows()
         addConstraints()
         registerForTraitChanges(traitsToListenWhenChanged, action: #selector(configureView))
@@ -76,6 +83,11 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
+            spinner.widthAnchor.constraint(equalToConstant: 100),
+            spinner.heightAnchor.constraint(equalToConstant: 100),
+            spinner.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: imageView.centerYAnchor),
+                
             statusLabel.heightAnchor.constraint(equalToConstant: 30),
             nameLabel.heightAnchor.constraint(equalToConstant: 30),
             
@@ -94,13 +106,25 @@ final class RMCharacterCollectionViewCell: UICollectionViewCell {
         ])
     }
     
+    private func isLoading(_ active: Bool) {
+        active
+        ? spinner.startAnimating()
+        : spinner.stopAnimating()
+    }
+    
     // MARK: - Public Methods
 
     public func configure(_ viewModel: RMCharacterCollectionViewCellViewModel) {
         nameLabel.text = viewModel.characterName
         statusLabel.text = viewModel.characterStatusText
+        isLoading(true)
         viewModel.fetchImage { [weak self] result in
             guard let self else { return }
+            defer {
+                DispatchQueue.main.async {
+                    self.isLoading(false)
+                }
+            }
             switch result {
             case .success(let image):
                 DispatchQueue.main.async {
