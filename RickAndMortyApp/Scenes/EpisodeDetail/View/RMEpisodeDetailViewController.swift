@@ -30,5 +30,32 @@ final class RMEpisodeDetailViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Episode"
+        setupView()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupView() {
+        setupBarButton()
+        addConstraints()
+    }
+    
+    private func setupBarButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(didTapShare)
+        )
+    }
+    
+    private func addConstraints() {
+        
+    }
+    
+    // MARK: - ObjC Methods
+
+    @objc
+    private func didTapShare() {
+        // MARK: - Share character info
     }
 }

@@ -22,7 +22,8 @@ final class RMEpisodesListViewControllerViewModel: RMEpisodesListViewControllerV
         didSet {
             episodes.forEach {
                 let viewModel = RMCharacterEpisodeCollectionViewCellViewModel(
-                    episodeDataUrl: URL(string: $0.url)
+                    episodeDataUrl: URL(string: $0.url),
+                    borderColor: .systemPurple
                 )
                 if !cellViewModels.contains(viewModel) {
                     cellViewModels.append(viewModel)

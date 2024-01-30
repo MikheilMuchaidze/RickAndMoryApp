@@ -29,3 +29,19 @@ extension UIView {
         [UITraitUserInterfaceStyle.self]
     }
 }
+
+extension UIViewController {
+    /// Function To add search button
+    public func addSearchButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .search,
+            target: self,
+            action: #selector(didTapSearch)
+        )
+    }
+    
+    /// search button functionality
+    @objc
+    public func didTapSearch() {
+    }
+}

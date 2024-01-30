@@ -61,6 +61,7 @@ final class RMEpisodesListViewController: UIViewController {
         registerViewModelListener()
         addConstraints()
         setupCollectionView()
+        addSearchButton()
         spinner.startAnimating()
     }
     

@@ -49,6 +49,7 @@ final class RMCharacterListViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = "Characters"
+        navigationItem.largeTitleDisplayMode = .never
         setupView()
         viewModel.fetchCharacters()
     }
@@ -60,6 +61,7 @@ final class RMCharacterListViewController: UIViewController {
         registerViewModelListener()
         addConstraints()
         setupCollectionView()
+        addSearchButton()
         spinner.startAnimating()
     }
     
@@ -111,6 +113,13 @@ final class RMCharacterListViewController: UIViewController {
     
     private func didLoadMoreCharacters(with newIndexPaths: [IndexPath]) {
         collectionView.insertItems(at: newIndexPaths)
+    }
+    
+    // MARK: - Overriden Methods
+    
+    override func didTapSearch() {
+        let searchVC = RMSearchViewController(config: RMSearchViewController.Config(type: .character))
+        navigationController?.pushViewController(searchVC, animated: true)
     }
 }
 
