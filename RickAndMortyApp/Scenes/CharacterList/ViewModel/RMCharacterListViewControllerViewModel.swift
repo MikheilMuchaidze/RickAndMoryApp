@@ -14,11 +14,6 @@ protocol RMCharacterListViewControllerViewModelProtocol: AnyObject {
     func getApiInfoNextString() -> String?
 }
 
-public enum UpdateModel {
-    case initialLoad
-    case paginationLoad([IndexPath])
-}
-
 /// View Model to handle character list view logic
 final class RMCharacterListViewControllerViewModel: RMCharacterListViewControllerViewModelProtocol {
     // MARK: - Private Properties
@@ -46,6 +41,10 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
     
     var shouldShowLoadMoreIndicator: Bool {
         apiInfo?.next != nil
+    }
+    enum UpdateModel {
+        case initialLoad
+        case paginationLoad([IndexPath])
     }
     
     // MARK: - Private Methods

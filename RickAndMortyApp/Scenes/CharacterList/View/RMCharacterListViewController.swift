@@ -8,7 +8,7 @@
 import UIKit
 
 /// View that handles showing  list of characters, loader, etc.
-final class RMCharacterViewController: UIViewController {
+final class RMCharacterListViewController: UIViewController {
     // MARK: - Private Properties
     
     private let viewModel = RMCharacterListViewControllerViewModel()
@@ -116,7 +116,7 @@ final class RMCharacterViewController: UIViewController {
 
 // MARK: - UICollectionViewDataSource & general cell deqeue
 
-extension RMCharacterViewController: UICollectionViewDataSource {
+extension RMCharacterListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         viewModel.getCellCount()
     }
@@ -135,7 +135,7 @@ extension RMCharacterViewController: UICollectionViewDataSource {
 
 // MARK: - CollectionView footer cell deqeue
 
-extension RMCharacterViewController {
+extension RMCharacterListViewController {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard kind == UICollectionView.elementKindSectionFooter, let footer = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
@@ -158,7 +158,7 @@ extension RMCharacterViewController {
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 
-extension RMCharacterViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+extension RMCharacterListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let bounds = UIScreen.main.bounds
         let width = (bounds.width-30)/2
@@ -171,7 +171,7 @@ extension RMCharacterViewController: UICollectionViewDelegate, UICollectionViewD
 
 // MARK: - UIScrollViewDelegate
 
-extension RMCharacterViewController: UIScrollViewDelegate {
+extension RMCharacterListViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard viewModel.shouldShowLoadMoreIndicator,
               !viewModel.isLoadingMore,
@@ -196,7 +196,7 @@ extension RMCharacterViewController: UIScrollViewDelegate {
 
 // MARK: - CollectionView didSelect
 
-extension RMCharacterViewController {
+extension RMCharacterListViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         navigateToCharacterDetailWith(character: viewModel.getSelectedCharacter(with: indexPath.row))

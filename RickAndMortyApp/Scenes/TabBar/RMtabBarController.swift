@@ -19,7 +19,7 @@ final class RMtabBarController: UITabBarController {
     // MARK: - Private Methods
     
     private func setupTabs() {
-        let charactersVC = RMCharacterViewController()
+        let charactersVC = RMCharacterListViewController()
         let locationsVC = RMLocationViewController()
         let episodesVC = RMEpisodesViewController()
         let settingsVC = RMSettingsViewController()
