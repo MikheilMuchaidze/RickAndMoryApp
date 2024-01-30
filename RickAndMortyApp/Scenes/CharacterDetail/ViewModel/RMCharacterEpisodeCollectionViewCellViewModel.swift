@@ -13,7 +13,7 @@ protocol RMEpisodeDataRender {
     var episode: String { get }
 }
 
-final class RMCharacterEpisodeCollectionViewCellViewModel {
+final class RMCharacterEpisodeCollectionViewCellViewModel: Hashable, Equatable {
     // MARK: - Private Properties
     
     private let episodeDataUrl: URL?
@@ -68,5 +68,16 @@ final class RMCharacterEpisodeCollectionViewCellViewModel {
                 print(failure)
             }
         }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.episodeDataUrl?.absoluteString ?? "")
+    }
+    
+    static func == (
+        lhs: RMCharacterEpisodeCollectionViewCellViewModel,
+        rhs: RMCharacterEpisodeCollectionViewCellViewModel
+    ) -> Bool {
+        lhs.hashValue == rhs.hashValue
     }
 }

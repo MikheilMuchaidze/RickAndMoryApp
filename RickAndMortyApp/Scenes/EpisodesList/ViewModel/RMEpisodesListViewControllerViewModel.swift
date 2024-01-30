@@ -1,30 +1,28 @@
 //
-//  RMCharacterListViewControllerViewModel.swift
+//  RMEpisodesListViewControllerViewModel.swift
 //  RickAndMortyApp
 //
-//  Created by Mikheil Muchaidze on 14.01.24.
+//  Created by Mikheil Muchaidze on 30.01.24.
 //
 
 import Foundation
 
-protocol RMCharacterListViewControllerViewModelProtocol: AnyObject {
+protocol RMEpisodesListViewControllerViewModelProtocol: AnyObject {
     func getCellCount() -> Int
-    func getCellViewModelForConfiguration(with index: Int) -> RMCharacterCollectionViewCellViewModel
-    func getSelectedCharacter(with index: Int) -> RMCharacter
+    func getCellViewModelForConfiguration(with index: Int) -> RMCharacterEpisodeCollectionViewCellViewModel
+    func getSelectedCharacter(with index: Int) -> RMEpisode
     func getApiInfoNextString() -> String?
 }
 
-/// View Model to handle character list view logic
-final class RMCharacterListViewControllerViewModel: RMCharacterListViewControllerViewModelProtocol {
+/// View Model to handle episode list view logic
+final class RMEpisodesListViewControllerViewModel: RMEpisodesListViewControllerViewModelProtocol {
     // MARK: - Private Properties
     
-    private var characters: [RMCharacter] = [] {
+    private var episodes: [RMEpisode] = [] {
         didSet {
-            characters.forEach {
-                let viewModel = RMCharacterCollectionViewCellViewModel(
-                    characterName: $0.name,
-                    characterStatus: $0.status,
-                    characterImageUrl: URL(string: $0.image)
+            episodes.forEach {
+                let viewModel = RMCharacterEpisodeCollectionViewCellViewModel(
+                    episodeDataUrl: URL(string: $0.url)
                 )
                 if !cellViewModels.contains(viewModel) {
                     cellViewModels.append(viewModel)
@@ -32,8 +30,8 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
             }
         }
     }
-    private var cellViewModels: [RMCharacterCollectionViewCellViewModel] = []
-    private var apiInfo: RMGetAllCharacterResponse.RMGetAllCharacterResponseInfo? = nil
+    private var cellViewModels: [RMCharacterEpisodeCollectionViewCellViewModel] = []
+    private var apiInfo: RMGetAllEpisodesResponse.RMGetAllEpisodesResponseInfo? = nil
     private(set) var isLoadingMore = false
     private var updateModel: ((UpdateModel) -> Void)?
     
@@ -51,10 +49,10 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
     
     /// Getting an index for a insertion in collection view
     /// - Returns: Array of indexpaths to insert in collection
-    private func getIndexForInsertion(results: [RMCharacter]) -> [IndexPath] {
+    private func getIndexForInsertion(results: [RMEpisode]) -> [IndexPath] {
         var indexPathsToAdd: [IndexPath] = []
         
-        let originalCount = characters.count
+        let originalCount = episodes.count
         let newCount = results.count
         let total = originalCount + newCount
         let startingIndex = total - newCount
@@ -69,18 +67,18 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
         updateModel = block
     }
     
-    /// Fetch initail set of characters (20)
-    public func fetchCharacters() {
+    /// Fetch initail set of episodes (20)
+    public func fetchEpisodes() {
         RMService.shared.execute(
-            .listCharactersRequest,
-            expecting: RMGetAllCharacterResponse.self
+            .listEpisodesRequest,
+            expecting: RMGetAllEpisodesResponse.self
         ) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let responseModel):
                 let info = responseModel.info
                 let results = responseModel.results
-                characters = results
+                episodes = results
                 apiInfo = info
                 DispatchQueue.main.async {
                     self.updateModel?(.initialLoad)
@@ -91,8 +89,8 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
         }
     }
     
-    /// Paginate if additional characters are needed (paginatipn)
-    public func fetchAdditionalCharacters(url: URL) {
+    /// Paginate if additional episodes are needed (paginatipn)
+    public func fetchAdditionalEpisodes(url: URL) {
         guard !isLoadingMore else {
             return
         }
@@ -105,7 +103,7 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
         
         RMService.shared.execute(
             request,
-            expecting: RMGetAllCharacterResponse.self
+            expecting: RMGetAllEpisodesResponse.self
         ) { [weak self] result in
             guard let self else { return }
             defer {
@@ -117,7 +115,7 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
                 let moreResults = responseModel.results
                 apiInfo = info
                 let getIndexForInsertion = self.getIndexForInsertion(results: moreResults)
-                characters.append(contentsOf: moreResults)
+                episodes.append(contentsOf: moreResults)
                 DispatchQueue.main.async {
                     self.updateModel?(.paginationLoad(getIndexForInsertion))
                 }
@@ -127,11 +125,11 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
         }
     }
     
-    public func getSelectedCharacter(with index: Int) -> RMCharacter {
-        characters[index]
+    public func getSelectedCharacter(with index: Int) -> RMEpisode {
+        episodes[index]
     }
     
-    public func getCellViewModelForConfiguration(with index: Int) -> RMCharacterCollectionViewCellViewModel {
+    public func getCellViewModelForConfiguration(with index: Int) -> RMCharacterEpisodeCollectionViewCellViewModel {
         cellViewModels[index]
     }
     
