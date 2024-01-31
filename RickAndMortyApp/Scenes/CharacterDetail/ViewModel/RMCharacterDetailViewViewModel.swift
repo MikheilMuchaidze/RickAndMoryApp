@@ -7,27 +7,32 @@
 
 import UIKit
 
-final class RMCharacterDetailViewViewModel {
+protocol RMCharacterDetailViewViewModelProtocol: AnyObject {
+    func getViewTitle() -> String
+    func getEpisodes() -> [String]
+}
+
+final class RMCharacterDetailViewViewModel: RMCharacterDetailViewViewModelProtocol {
     // MARK: - Private Properties
     
     private let character: RMCharacter
     private var requestUrl: URL? {
         URL(string: character.url)
     }
+    private(set) var sections: [SectionType] = []
+    private var title: String {
+        character.name.uppercased()
+    }
+    private var episodes: [String] {
+        character.episode
+    }
     
     // MARK: - Public Properties
     
-    public var title: String {
-        character.name.uppercased()
-    }
     public enum SectionType {
         case photo(viewModel: RMCharacterPhotoCollectionViewCellViewModel)
         case information(viewModels: [RMCharacterInfoCollectionViewCellViewModel])
         case episodes(viewModels: [RMCharacterEpisodeCollectionViewCellViewModel])
-    }
-    public var sections: [SectionType] = []
-    public var episodes: [String] {
-        character.episode
     }
     
     // MARK: - Init
@@ -85,7 +90,7 @@ final class RMCharacterDetailViewViewModel {
         ]
     }
     
-    // MARK: - Public Properties
+    // MARK: - Public Methods
     
     public func createPhotoSectionLayout()  -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
@@ -161,5 +166,13 @@ final class RMCharacterDetailViewViewModel {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         return section
+    }
+    
+    public func getViewTitle() -> String {
+        title
+    }
+    
+    public func getEpisodes() -> [String] {
+        episodes
     }
 }

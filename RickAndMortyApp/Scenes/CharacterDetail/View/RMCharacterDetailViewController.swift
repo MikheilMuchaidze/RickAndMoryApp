@@ -12,14 +12,21 @@ final class RMCharacterDetailViewController: UIViewController {
     // MARK: - Private Properties
     
     private let viewModel: RMCharacterDetailViewViewModel
-    private let detailView: RMCharacterDetailView
+    private let spinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.hidesWhenStopped = true
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    private var collectionView: UICollectionView?
     
     // MARK: - Init
     
     init(viewModel: RMCharacterDetailViewViewModel) {
         self.viewModel = viewModel
-        self.detailView = RMCharacterDetailView(frame: .zero, viewModel: viewModel)
         super.init(nibName: nil, bundle: nil)
+        let collectionVIew = createCollectionView()
+        self.collectionView = collectionVIew
     }
     
     required init?(coder: NSCoder) {
@@ -31,16 +38,9 @@ final class RMCharacterDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = viewModel.title
+        title = viewModel.getViewTitle()
         navigationItem.largeTitleDisplayMode = .never
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .action,
-            target: self,
-            action: #selector(didTapShare)
-        )
         setupView()
-        detailView.collectionView?.delegate = self
-        detailView.collectionView?.dataSource = self
     }
     
     // MARK: - ObjC Methods
@@ -53,13 +53,73 @@ final class RMCharacterDetailViewController: UIViewController {
     // MARK: - Private Merthods
     
     private func setupView() {
-        view.addSubViews(detailView)
+        guard let collectionView else { return }
+        view.addSubViews(collectionView, spinner)
+        addConstraints()
+        setupCollectionView()
+        setupBarButton()
+    }
+    
+    private func setupBarButton() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(didTapShare)
+        )
+    }
+    
+    private func addConstraints() {
+        guard let collectionView else { return }
         NSLayoutConstraint.activate([
-            detailView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            detailView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            detailView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            detailView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            spinner.widthAnchor.constraint(equalToConstant: 100),
+            spinner.heightAnchor.constraint(equalToConstant: 100),
+            spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            collectionView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
         ])
+    }
+    
+    private func setupCollectionView() {
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+    }
+    
+    private func createCollectionView() -> UICollectionView {
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, _ in
+            self.createSection(for: sectionIndex)
+        }
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.register(
+            RMCharacterPhotoCollectionViewCell.self,
+            forCellWithReuseIdentifier: RMCharacterPhotoCollectionViewCell.cellIdentifier
+        )
+        collectionView.register(
+            RMCharacterInfoCollectionViewCell.self,
+            forCellWithReuseIdentifier: RMCharacterInfoCollectionViewCell.cellIdentifier
+        )
+        collectionView.register(
+            RMCharacterEpisodeCollectionViewCell.self,
+            forCellWithReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier
+        )
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        return collectionView
+    }
+    
+    private func createSection(for sectionIndex: Int) -> NSCollectionLayoutSection? {
+        let sectionTypes = viewModel.sections
+        switch sectionTypes[sectionIndex] {
+        case .photo:
+            return viewModel.createPhotoSectionLayout()
+        case .information:
+            return viewModel.createInfoSectionLayout()
+        case .episodes:
+            return viewModel.createEpisodeSectionLayout()
+        }
     }
 }
 
@@ -124,7 +184,7 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
         case .photo, .information:
             break
         case .episodes:
-            let episodes = viewModel.episodes
+            let episodes = viewModel.getEpisodes()
             let selection = episodes[indexPath.row]
             let episodeDetailvc = RMEpisodeDetailViewController(url: URL(string: selection))
             navigationController?.pushViewController(episodeDetailvc, animated: true)
