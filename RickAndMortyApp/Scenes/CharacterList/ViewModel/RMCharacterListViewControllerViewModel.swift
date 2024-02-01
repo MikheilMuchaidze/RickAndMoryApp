@@ -6,10 +6,9 @@
 //
 
 import Foundation
+import Combine
 
 protocol RMCharacterListViewControllerViewModelProtocol: AnyObject {
-    func getCellCount() -> Int
-    func getCellViewModelForConfiguration(with index: Int) -> RMCharacterCollectionViewCellViewModel
     func getSelectedCharacter(with index: Int) -> RMCharacter
     func getApiInfoNextString() -> String?
 }
@@ -20,54 +19,30 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
     
     private var characters: [RMCharacter] = [] {
         didSet {
-            characters.forEach {
-                let viewModel = RMCharacterCollectionViewCellViewModel(
+            let viewModels = characters.map {
+                RMCharacterCollectionViewCellViewModel(
                     characterName: $0.name,
                     characterStatus: $0.status,
                     characterImageUrl: URL(string: $0.image)
                 )
-                if !cellViewModels.contains(viewModel) {
-                    cellViewModels.append(viewModel)
-                }
             }
+            cellViewModels = viewModels
         }
     }
-    private var cellViewModels: [RMCharacterCollectionViewCellViewModel] = []
     private var apiInfo: RMGetAllCharacterResponse.RMGetAllCharacterResponseInfo? = nil
     private(set) var isLoadingMore = false
-    private var updateModel: ((UpdateModel) -> Void)?
+    
+    // MARK: - Published Properties
+    
+    @Published var cellViewModels: [RMCharacterCollectionViewCellViewModel] = []
     
     // MARK: - Public Properties
     
     var shouldShowLoadMoreIndicator: Bool {
         apiInfo?.next != nil
     }
-    enum UpdateModel {
-        case initialLoad
-        case paginationLoad([IndexPath])
-    }
-    
-    // MARK: - Private Methods
-    
-    /// Getting an index for a insertion in collection view
-    /// - Returns: Array of indexpaths to insert in collection
-    private func getIndexForInsertion(results: [RMCharacter]) -> [IndexPath] {
-        var indexPathsToAdd: [IndexPath] = []
-        
-        let originalCount = characters.count
-        let newCount = results.count
-        let total = originalCount + newCount
-        let startingIndex = total - newCount
-        indexPathsToAdd = Array(startingIndex..<(startingIndex + newCount)).compactMap { IndexPath(row: $0, section: 0) }
-        
-        return indexPathsToAdd
-    }
     
     // MARK: - Public Methods
-    
-    public func registerForData(_ block: @escaping (UpdateModel) -> Void) {
-        updateModel = block
-    }
     
     /// Fetch initail set of characters (20)
     public func fetchCharacters() {
@@ -82,9 +57,6 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
                 let results = responseModel.results
                 characters = results
                 apiInfo = info
-                DispatchQueue.main.async {
-                    self.updateModel?(.initialLoad)
-                }
             case .failure(let error):
                 print(String(describing: error))
             }
@@ -116,11 +88,7 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
                 let info = responseModel.info
                 let moreResults = responseModel.results
                 apiInfo = info
-                let getIndexForInsertion = self.getIndexForInsertion(results: moreResults)
                 characters.append(contentsOf: moreResults)
-                DispatchQueue.main.async {
-                    self.updateModel?(.paginationLoad(getIndexForInsertion))
-                }
             case .failure(let error):
                 print(String(describing: error))
             }
@@ -129,14 +97,6 @@ final class RMCharacterListViewControllerViewModel: RMCharacterListViewControlle
     
     public func getSelectedCharacter(with index: Int) -> RMCharacter {
         characters[index]
-    }
-    
-    public func getCellViewModelForConfiguration(with index: Int) -> RMCharacterCollectionViewCellViewModel {
-        cellViewModels[index]
-    }
-    
-    public func getCellCount() -> Int {
-        cellViewModels.count
     }
     
     public func getShouldShowLoadMoreIndicatorValue() -> Bool {

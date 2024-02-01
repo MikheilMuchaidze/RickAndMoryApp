@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 /// View that handles showing  list of characters, loader, etc.
 final class RMCharacterListViewController: UIViewController {
@@ -42,6 +43,9 @@ final class RMCharacterListViewController: UIViewController {
         )
         return collectionView
     }()
+    private var cancellables: Set<AnyCancellable> = []
+    private var firstLoad = false
+    private var cellViewModels: [RMCharacterCollectionViewCellViewModel] = []
     
     // MARK: - View Lifecycle
     
@@ -85,15 +89,18 @@ final class RMCharacterListViewController: UIViewController {
     }
     
     private func registerViewModelListener() {
-        viewModel.registerForData { [weak self] updateModel in
-            guard let self else { return }
-            switch updateModel {
-            case .initialLoad:
-                didLoadInitialCharacters()
-            case .paginationLoad(let index):
-                didLoadMoreCharacters(with: index)
+        viewModel.$cellViewModels
+            .dropFirst()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] cellViewModels in
+                guard let self else { return }
+                if !firstLoad {
+                    didLoadInitialCharacters(with: cellViewModels)
+                } else {
+                    didLoadMoreCharacters(with: cellViewModels)
+                }
             }
-        }
+            .store(in: &cancellables)
     }
     
     private func navigateToCharacterDetailWith(character: RMCharacter) {
@@ -102,7 +109,9 @@ final class RMCharacterListViewController: UIViewController {
         navigationController?.pushViewController(characterDetailVC, animated: true)
     }
     
-    private func didLoadInitialCharacters() {
+    private func didLoadInitialCharacters(with cellViewModels: [RMCharacterCollectionViewCellViewModel]) {
+        firstLoad = true
+        self.cellViewModels = cellViewModels
         spinner.stopAnimating()
         collectionView.isHidden = false
         collectionView.reloadData() // Initial fetch
@@ -111,8 +120,22 @@ final class RMCharacterListViewController: UIViewController {
         }
     }
     
-    private func didLoadMoreCharacters(with newIndexPaths: [IndexPath]) {
-        collectionView.insertItems(at: newIndexPaths)
+    private func didLoadMoreCharacters(with cellViewModels: [RMCharacterCollectionViewCellViewModel]) {
+        var indexPathsToAdd: [IndexPath] = []
+                
+        let originalCount = self.cellViewModels.count
+        let newViewModels = cellViewModels.filter { !self.cellViewModels.contains($0) }
+        
+        let newCount = newViewModels.count
+        let total = originalCount + newCount
+        let startingIndex = total - newCount
+        
+        indexPathsToAdd = Array(startingIndex..<(startingIndex + newCount)).compactMap { IndexPath(row: $0, section: 0) }
+        
+        self.cellViewModels.append(contentsOf: newViewModels)
+        collectionView.performBatchUpdates {
+            self.collectionView.insertItems(at: indexPathsToAdd)
+        }
     }
     
     // MARK: - Overriden Methods
@@ -127,7 +150,7 @@ final class RMCharacterListViewController: UIViewController {
 
 extension RMCharacterListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.getCellCount()
+        cellViewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -137,7 +160,7 @@ extension RMCharacterListViewController: UICollectionViewDataSource {
         ) as? RMCharacterCollectionViewCell else {
             fatalError("Unsupported cell")
         }
-        cell.configure(viewModel.getCellViewModelForConfiguration(with: indexPath.row))
+        cell.configure(cellViewModels[indexPath.row])
         return cell
     }
 }
