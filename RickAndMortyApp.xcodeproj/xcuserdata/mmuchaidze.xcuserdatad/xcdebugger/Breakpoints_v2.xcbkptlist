@@ -3,4 +3,86 @@
    uuid = "15BBF290-38ED-4F03-BD05-7532A322FC2B"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D714FB0C-0A08-4A10-AFA8-4CCDC7758474"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RickAndMortyApp/Scenes/EpisodeDetail/ViewModel/RMEpisodeDetailViewViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "fetchRelatedCharacters(episode:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "441F1719-C128-4775-B535-9F6A7926DD63"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RickAndMortyApp/Scenes/EpisodeDetail/ViewModel/RMEpisodeDetailViewViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "fetchRelatedCharacters(episode:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E7B67E87-3DD8-457D-AB46-9A0FDD25CAA7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RickAndMortyApp/Scenes/EpisodeDetail/View/RMEpisodeDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "registerViewModelListener()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E7B67E87-3DD8-457D-AB46-9A0FDD25CAA7 - 152da4cedadf90f8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;(RickAndMortyApp.RMEpisode, Swift.Array&lt;RickAndMortyApp.RMCharacter&gt;)&gt;) -&gt; () in RickAndMortyApp.RMEpisodeDetailViewController.registerViewModelListener() -&gt; ()"
+                  moduleName = "RickAndMortyApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmuchaidze/Desktop/LearningProject/RickAndMortyApp/RickAndMortyApp/Scenes/EpisodeDetail/View/RMEpisodeDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "380">
+               </Location>
+               <Location
+                  uuid = "E7B67E87-3DD8-457D-AB46-9A0FDD25CAA7 - 152da4cedadf90f8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;(RickAndMortyApp.RMEpisode, Swift.Array&lt;RickAndMortyApp.RMCharacter&gt;)&gt;) -&gt; () in RickAndMortyApp.RMEpisodeDetailViewController.registerViewModelListener() -&gt; ()"
+                  moduleName = "RickAndMortyApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mmuchaidze/Desktop/LearningProject/RickAndMortyApp/RickAndMortyApp/Scenes/EpisodeDetail/View/RMEpisodeDetailViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "396">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

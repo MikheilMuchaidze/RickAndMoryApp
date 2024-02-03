@@ -344,7 +344,6 @@
 				2F7822042B517D92003ABCCC /* Managers */,
 				2F7822032B517D8A003ABCCC /* APIClinet */,
 				2F7822002B517D60003ABCCC /* Models */,
-				2F7821FF2B517D52003ABCCC /* Controllers */,
 				2F7821DD2B517B6B003ABCCC /* Info.plist */,
 			);
 			path = RickAndMortyApp;
@@ -365,14 +364,6 @@
 				2F7821F22B517B6C003ABCCC /* RickAndMortyAppUITestsLaunchTests.swift */,
 			);
 			path = RickAndMortyAppUITests;
-			sourceTree = "<group>";
-		};
-		2F7821FF2B517D52003ABCCC /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				2F78220C2B518015003ABCCC /* Core */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		2F7822002B517D60003ABCCC /* Models */ = {
@@ -413,13 +404,6 @@
 				2F7821D82B517B6B003ABCCC /* Assets.xcassets */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		2F78220C2B518015003ABCCC /* Core */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Core;
 			sourceTree = "<group>";
 		};
 		2F7822232B533782003ABCCC /* DataTypes */ = {
