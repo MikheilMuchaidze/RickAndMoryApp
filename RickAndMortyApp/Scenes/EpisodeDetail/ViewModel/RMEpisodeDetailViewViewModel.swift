@@ -12,9 +12,17 @@ final class RMEpisodeDetailViewViewModel {
     
     private let enpointUrl: URL?
     
+    // MARK: - Public Properties
+    
+    public enum SectionType {
+        case information(viewModels: [RMEpisodeInfoCollectionViewCellViewModel])
+        case characters(viewModels: [RMCharacterCollectionViewCellViewModel])
+    }
+    private(set) var sections: [SectionType] = []
+    
     // MARK: - Published Properties
     
-    @Published var dataTuple: (RMEpisode, [RMCharacter])?
+    @Published var episodeAndAssociatedCharacterList: (RMEpisode, [RMCharacter])?
     
     // MARK: - Init
     
@@ -67,7 +75,7 @@ final class RMEpisodeDetailViewViewModel {
             }
         }
         
-        dataTuple = (
+        episodeAndAssociatedCharacterList = (
             episode,
             characters
         )

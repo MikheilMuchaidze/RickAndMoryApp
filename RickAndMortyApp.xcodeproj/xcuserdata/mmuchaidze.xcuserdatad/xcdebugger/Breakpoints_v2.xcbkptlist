@@ -7,81 +7,65 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D714FB0C-0A08-4A10-AFA8-4CCDC7758474"
+            uuid = "DAA176E7-3B2D-489F-BD6A-43946E5C1FD1"
             shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RickAndMortyApp/Scenes/EpisodeDetail/ViewModel/RMEpisodeDetailViewViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "fetchRelatedCharacters(episode:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "441F1719-C128-4775-B535-9F6A7926DD63"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RickAndMortyApp/Scenes/EpisodeDetail/ViewModel/RMEpisodeDetailViewViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "fetchRelatedCharacters(episode:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E7B67E87-3DD8-457D-AB46-9A0FDD25CAA7"
-            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RickAndMortyApp/Scenes/EpisodeDetail/View/RMEpisodeDetailViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "registerViewModelListener()"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "collectionView(_:numberOfItemsInSection:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "E7B67E87-3DD8-457D-AB46-9A0FDD25CAA7 - 152da4cedadf90f8"
+                  uuid = "DAA176E7-3B2D-489F-BD6A-43946E5C1FD1 - 6b29cffaafad8bb2"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;(RickAndMortyApp.RMEpisode, Swift.Array&lt;RickAndMortyApp.RMCharacter&gt;)&gt;) -&gt; () in RickAndMortyApp.RMEpisodeDetailViewController.registerViewModelListener() -&gt; ()"
+                  symbolName = "RickAndMortyApp.RMEpisodeDetailViewController.collectionView(_: __C.UICollectionView, numberOfItemsInSection: Swift.Int) -&gt; Swift.Int"
                   moduleName = "RickAndMortyApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mmuchaidze/Desktop/LearningProject/RickAndMortyApp/RickAndMortyApp/Scenes/EpisodeDetail/View/RMEpisodeDetailViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "380">
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "300">
                </Location>
                <Location
-                  uuid = "E7B67E87-3DD8-457D-AB46-9A0FDD25CAA7 - 152da4cedadf90f8"
+                  uuid = "DAA176E7-3B2D-489F-BD6A-43946E5C1FD1 - 6b29cffaafad8bb2"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;(RickAndMortyApp.RMEpisode, Swift.Array&lt;RickAndMortyApp.RMCharacter&gt;)&gt;) -&gt; () in RickAndMortyApp.RMEpisodeDetailViewController.registerViewModelListener() -&gt; ()"
+                  symbolName = "RickAndMortyApp.RMEpisodeDetailViewController.collectionView(_: __C.UICollectionView, numberOfItemsInSection: Swift.Int) -&gt; Swift.Int"
                   moduleName = "RickAndMortyApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mmuchaidze/Desktop/LearningProject/RickAndMortyApp/RickAndMortyApp/Scenes/EpisodeDetail/View/RMEpisodeDetailViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "396">
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "60">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E40624CD-9214-407E-BA33-8A0C43D5109D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RickAndMortyApp/Scenes/EpisodeDetail/View/RMEpisodeDetailViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "registerViewModelListener()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

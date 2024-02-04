@@ -21,6 +21,7 @@ final class RMEpisodeDetailViewController: UIViewController {
         return spinner
     }()
     private var cancellables: Set<AnyCancellable> = []
+    private var episodeAndAssociatedCharacterList: (RMEpisode, [RMCharacter])?
     
     // MARK: - Init
     
@@ -58,13 +59,17 @@ final class RMEpisodeDetailViewController: UIViewController {
     }
     
     private func registerViewModelListener() {
-        viewModel.$dataTuple
+        viewModel.$episodeAndAssociatedCharacterList
             .dropFirst()
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] dataSource in
+            .sink { [weak self] episodeAndAssociatedCharacterList in
                 guard let self else { return }
-                view.backgroundColor = .red
-                print("update")
+                self.episodeAndAssociatedCharacterList = episodeAndAssociatedCharacterList
+                collectionView?.isHidden = false
+                UIView.animate(withDuration: 0.3) {
+                    self.collectionView?.alpha = 1
+                    self.collectionView?.reloadData()
+                }
                 spinner.stopAnimating()
             }
             .store(in: &cancellables)
@@ -94,8 +99,8 @@ final class RMEpisodeDetailViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-//        collectionView?.delegate = self
-//        collectionView?.dataSource = self
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
     }
     
     private func createCollectionView() -> UICollectionView {
@@ -105,6 +110,10 @@ final class RMEpisodeDetailViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isHidden = true
         collectionView.alpha = 0
+        collectionView.register(
+            UICollectionViewCell.self,
+            forCellWithReuseIdentifier: "cell"
+        )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
          
         return collectionView
@@ -116,6 +125,12 @@ final class RMEpisodeDetailViewController: UIViewController {
                 widthDimension: .fractionalWidth(1),
                 heightDimension: .fractionalHeight(1)
             )
+        )
+        item.contentInsets = NSDirectionalEdgeInsets(
+            top: 10,
+            leading: 10,
+            bottom: 10,
+            trailing: 10
         )
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
@@ -137,5 +152,30 @@ final class RMEpisodeDetailViewController: UIViewController {
     @objc
     private func didTapShare() {
         // MARK: - Share character info
+    }
+}
+
+// MARK: - UICollectionViewDataSource, UICollectionViewDelegate
+
+extension RMEpisodeDetailViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        episodeAndAssociatedCharacterList?.1.count ?? .zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "cell",
+            for: indexPath
+        )
+        cell.backgroundColor = .yellow
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
