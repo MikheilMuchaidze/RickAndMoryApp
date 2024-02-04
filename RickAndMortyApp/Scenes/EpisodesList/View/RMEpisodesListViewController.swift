@@ -96,8 +96,12 @@ final class RMEpisodesListViewController: UIViewController {
         }
     }
     
+    #warning("episodeNumber needs work to inject the correct one")
     private func navigateToEpisodeDetailWith(episode: RMEpisode) {
-        let episodeDetailVC = RMEpisodeDetailViewController(url: URL(string: episode.url))
+        let episodeDetailVC = RMEpisodeDetailViewController(
+            url: URL( string: episode.url ),
+            episodeNumber: "123"
+        )
         navigationController?.pushViewController(episodeDetailVC, animated: true)
     }
     

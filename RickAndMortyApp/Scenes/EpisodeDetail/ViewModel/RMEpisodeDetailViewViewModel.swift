@@ -11,6 +11,11 @@ final class RMEpisodeDetailViewViewModel {
     // MARK: - Private Properties
     
     private let enpointUrl: URL?
+    private var episodeAndAssociatedCharacterList: (episode: RMEpisode, charactersInEpisode: [RMCharacter])? {
+        didSet {
+            createCellViewModels()
+        }
+    }
     
     // MARK: - Public Properties
     
@@ -18,16 +23,54 @@ final class RMEpisodeDetailViewViewModel {
         case information(viewModels: [RMEpisodeInfoCollectionViewCellViewModel])
         case characters(viewModels: [RMCharacterCollectionViewCellViewModel])
     }
-    private(set) var sections: [SectionType] = []
     
     // MARK: - Published Properties
     
-    @Published var episodeAndAssociatedCharacterList: (RMEpisode, [RMCharacter])?
+    @Published var cellViewModels: [SectionType] = []
     
     // MARK: - Init
     
     init(enpointUrl: URL?) {
         self.enpointUrl = enpointUrl
+    }
+    
+    // MARK: - Private Methods
+    
+    private func createCellViewModels() {
+        guard let episodeAndAssociatedCharacterList else { return }
+        let episode = episodeAndAssociatedCharacterList.episode
+        let characters = episodeAndAssociatedCharacterList.charactersInEpisode
+        cellViewModels = [
+            .information(
+                viewModels: [
+                    .init(
+                        title: "Episode Name:",
+                        value: episode.name
+                    ),
+                    .init(
+                        title: "Air Date:",
+                        value: episode.air_date
+                    ),
+                    .init(
+                        title: "Episode:",
+                        value: episode.episode
+                    ),
+                    .init(
+                        title: "Created:",
+                        value: episode.created
+                    )
+                ]
+            ),
+            .characters(
+                viewModels: characters.compactMap {
+                    RMCharacterCollectionViewCellViewModel(
+                        characterName: $0.name,
+                        characterStatus: $0.status,
+                        characterImageUrl: URL(string: $0.image)
+                    )
+                }
+            )
+        ]
     }
     
     // MARK: - Public Methods
@@ -76,8 +119,8 @@ final class RMEpisodeDetailViewViewModel {
         }
         
         episodeAndAssociatedCharacterList = (
-            episode,
-            characters
+            episode: episode,
+            charactersInEpisode: characters
         )
     }
 }

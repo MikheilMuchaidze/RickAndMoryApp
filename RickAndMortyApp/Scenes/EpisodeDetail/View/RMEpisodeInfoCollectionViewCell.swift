@@ -9,5 +9,51 @@ import UIKit
 
 /// Single cell for a episode info
 final class RMEpisodeInfoCollectionViewCell: UICollectionViewCell {
+    // MARK: - Identifier
     
+    static let cellIdentifier = "RMEpisodeInfoCollectionViewCell"
+    
+    // MARK: - Init
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        contentView.backgroundColor = .secondarySystemBackground
+        setupBorder()
+        contentView.layer.masksToBounds = true
+        addDefaultShadows()
+        addConstraints()
+        registerForTraitChanges(traitsToListenWhenChanged, action: #selector(configureView))
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("Unsupported")
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupBorder() {
+        contentView.layer.cornerRadius = 8
+        contentView.layer.borderWidth = 2
+    }
+    
+    private func addConstraints() {
+        NSLayoutConstraint.activate([
+        ])
+    }
+    
+    // MARK: - ObjC Methods
+    
+    @objc
+    private func configureView() {
+        addDefaultShadows()
+    }
+    
+    // MARK: - Public Methods
+
+    public func configure(_ viewModel: RMEpisodeInfoCollectionViewCellViewModel) {
+    }
 }

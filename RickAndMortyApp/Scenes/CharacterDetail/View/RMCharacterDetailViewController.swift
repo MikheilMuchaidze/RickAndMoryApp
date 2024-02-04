@@ -178,6 +178,7 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
         }
     }
     
+#warning("episodeNumber needs work to inject the correct one")
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sectionType = viewModel.sections[indexPath.section]
         switch sectionType {
@@ -186,7 +187,10 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
         case .episodes:
             let episodes = viewModel.getEpisodes()
             let selection = episodes[indexPath.row]
-            let episodeDetailvc = RMEpisodeDetailViewController(url: URL(string: selection))
+            let episodeDetailvc = RMEpisodeDetailViewController(
+                url: URL(string: selection),
+                episodeNumber: "123"
+            )
             navigationController?.pushViewController(episodeDetailvc, animated: true)
         }
     }
