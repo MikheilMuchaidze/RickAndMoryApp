@@ -147,9 +147,9 @@ final class RMEpisodeDetailViewController: UIViewController {
         )
         item.contentInsets = NSDirectionalEdgeInsets(
             top: 10,
-            leading: 10,
+            leading: 15,
             bottom: 10,
-            trailing: 10
+            trailing: 15
         )
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
@@ -171,9 +171,9 @@ final class RMEpisodeDetailViewController: UIViewController {
         )
         item.contentInsets = NSDirectionalEdgeInsets(
             top: 10,
-            leading: 0,
+            leading: 5,
             bottom: 10,
-            trailing: 0
+            trailing: 5
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
