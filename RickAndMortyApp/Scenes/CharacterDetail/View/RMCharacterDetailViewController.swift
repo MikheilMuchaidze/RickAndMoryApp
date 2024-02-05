@@ -178,7 +178,6 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
         }
     }
     
-#warning("episodeNumber needs work to inject the correct one")
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sectionType = viewModel.sections[indexPath.section]
         switch sectionType {
