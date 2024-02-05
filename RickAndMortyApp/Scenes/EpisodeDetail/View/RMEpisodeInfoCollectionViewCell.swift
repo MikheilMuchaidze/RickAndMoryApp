@@ -38,6 +38,7 @@ final class RMEpisodeInfoCollectionViewCell: UICollectionViewCell {
     private func setupBorder() {
         contentView.layer.cornerRadius = 8
         contentView.layer.borderWidth = 2
+        contentView.layer.borderColor = UIColor.secondaryLabel.cgColor
     }
     
     private func addConstraints() {
@@ -50,6 +51,7 @@ final class RMEpisodeInfoCollectionViewCell: UICollectionViewCell {
     @objc
     private func configureView() {
         addDefaultShadows()
+        setupBorder()
     }
     
     // MARK: - Public Methods
