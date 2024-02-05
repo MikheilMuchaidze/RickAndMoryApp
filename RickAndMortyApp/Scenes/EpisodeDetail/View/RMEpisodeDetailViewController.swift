@@ -154,7 +154,7 @@ final class RMEpisodeDetailViewController: UIViewController {
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1.0),
-                heightDimension: .absolute(100)
+                heightDimension: .absolute(80)
             ),
             subitems: [item]
         )
@@ -189,9 +189,12 @@ final class RMEpisodeDetailViewController: UIViewController {
         return section
     }
     
-    private func configure() {
-        
+    private func navigateToCharacterDetailWith(character: RMCharacter) {
+        let viewModel = RMCharacterDetailViewViewModel(character: character)
+        let characterDetailVC = RMCharacterDetailViewController(viewModel: viewModel)
+        navigationController?.pushViewController(characterDetailVC, animated: true)
     }
+
     
     // MARK: - ObjC Methods
 
@@ -249,5 +252,14 @@ extension RMEpisodeDetailViewController: UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        guard let sections = cellViewModels else { fatalError("No ViewModel") }
+        let sectionType = sections[indexPath.section]
+        switch sectionType {
+        case .information:
+            break
+        case .characters:
+            guard let character = viewModel.character(at: indexPath.row) else { return }
+            navigateToCharacterDetailWith(character: character)
+        }
     }
 }

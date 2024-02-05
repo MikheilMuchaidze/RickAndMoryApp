@@ -12,6 +12,7 @@ protocol RMEpisodesListViewControllerViewModelProtocol: AnyObject {
     func getCellViewModelForConfiguration(with index: Int) -> RMCharacterEpisodeCollectionViewCellViewModel
     func getSelectedCharacter(with index: Int) -> RMEpisode
     func getApiInfoNextString() -> String?
+    func getEpisodeNumber(with index: Int) -> String
 }
 
 /// View Model to handle episode list view logic
@@ -148,5 +149,9 @@ final class RMEpisodesListViewControllerViewModel: RMEpisodesListViewControllerV
     
     public func getApiInfoNextString() -> String? {
         apiInfo?.next
+    }
+    
+    public func getEpisodeNumber(with index: Int) -> String {
+        episodes[index].episode
     }
 }

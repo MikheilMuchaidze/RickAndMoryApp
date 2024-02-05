@@ -7,7 +7,11 @@
 
 import Foundation
 
-final class RMEpisodeDetailViewViewModel {
+protocol RMEpisodeDetailViewViewModelProtocol {
+    func character(at index: Int) -> RMCharacter?
+}
+
+final class RMEpisodeDetailViewViewModel: RMEpisodeDetailViewViewModelProtocol {
     // MARK: - Private Properties
     
     private let enpointUrl: URL?
@@ -40,6 +44,13 @@ final class RMEpisodeDetailViewViewModel {
         guard let episodeAndAssociatedCharacterList else { return }
         let episode = episodeAndAssociatedCharacterList.episode
         let characters = episodeAndAssociatedCharacterList.charactersInEpisode
+        var createdString: String {
+            var createdString = ""
+            if let date = RMCharacterInfoCollectionViewCellViewModel.dateFromatter.date(from: episode.created) {
+                createdString =  RMCharacterInfoCollectionViewCellViewModel.shortDateFormatter.string(from: date)
+            }
+            return createdString
+        }
         cellViewModels = [
             .information(
                 viewModels: [
@@ -57,7 +68,7 @@ final class RMEpisodeDetailViewViewModel {
                     ),
                     .init(
                         title: "Created:",
-                        value: episode.created
+                        value: createdString
                     )
                 ]
             ),
@@ -71,29 +82,6 @@ final class RMEpisodeDetailViewViewModel {
                 }
             )
         ]
-    }
-    
-    // MARK: - Public Methods
-    
-    /// Fetch backing episode model
-    public func fetchEpisodeData() {
-        guard
-            let url = enpointUrl,
-            let requet = RMRequest(url: url)
-        else { return }
-        
-        RMService.shared.execute(
-            requet,
-            expecting: RMEpisode.self
-        ) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let responseModel):
-                fetchRelatedCharacters(episode: responseModel)
-            case .failure(let error):
-                print(String(describing: error))
-            }
-        }
     }
     
     // MARK: - Private Methods
@@ -122,5 +110,35 @@ final class RMEpisodeDetailViewViewModel {
             episode: episode,
             charactersInEpisode: characters
         )
+    }
+    
+    // MARK: - Public Methods
+    
+    /// Fetch backing episode model
+    public func fetchEpisodeData() {
+        guard
+            let url = enpointUrl,
+            let requet = RMRequest(url: url)
+        else { return }
+        
+        RMService.shared.execute(
+            requet,
+            expecting: RMEpisode.self
+        ) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let responseModel):
+                fetchRelatedCharacters(episode: responseModel)
+            case .failure(let error):
+                print(String(describing: error))
+            }
+        }
+    }
+    
+    /// Get an picked character info from the list
+    /// - Parameter at: The number to pick from list
+    public func character(at index: Int) -> RMCharacter? {
+        guard let episodeAndAssociatedCharacterList else { return nil }
+        return episodeAndAssociatedCharacterList.charactersInEpisode[index]
     }
 }

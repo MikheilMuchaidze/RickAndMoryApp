@@ -96,11 +96,13 @@ final class RMEpisodesListViewController: UIViewController {
         }
     }
     
-    #warning("episodeNumber needs work to inject the correct one")
-    private func navigateToEpisodeDetailWith(episode: RMEpisode) {
+    private func navigateToEpisodeDetailWith(
+        episode: RMEpisode,
+        episodeNumber: String
+    ) {
         let episodeDetailVC = RMEpisodeDetailViewController(
             url: URL( string: episode.url ),
-            episodeNumber: "123"
+            episodeNumber: episodeNumber
         )
         navigationController?.pushViewController(episodeDetailVC, animated: true)
     }
@@ -115,7 +117,9 @@ final class RMEpisodesListViewController: UIViewController {
     }
     
     private func didLoadMoreEpisodes(with newIndexPaths: [IndexPath]) {
-        collectionView.insertItems(at: newIndexPaths)
+        collectionView.performBatchUpdates {
+            self.collectionView.insertItems(at: newIndexPaths)
+        }
     }
 }
 
@@ -204,6 +208,9 @@ extension RMEpisodesListViewController: UIScrollViewDelegate {
 extension RMEpisodesListViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        navigateToEpisodeDetailWith(episode: viewModel.getSelectedCharacter(with: indexPath.row))
+        navigateToEpisodeDetailWith(
+            episode: viewModel.getSelectedCharacter(with: indexPath.row),
+            episodeNumber: viewModel.getEpisodeNumber(with: indexPath.row)
+        )
     }
 }
