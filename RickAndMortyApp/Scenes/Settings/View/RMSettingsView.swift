@@ -33,6 +33,7 @@ struct RMSettingsView: View {
             }
             .padding(.bottom, 5)
         }
+        .scrollDisabled(true)
         .padding(.top, -20)
     }
 }
