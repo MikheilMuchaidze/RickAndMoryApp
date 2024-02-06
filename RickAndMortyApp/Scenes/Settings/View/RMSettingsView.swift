@@ -30,14 +30,20 @@ struct RMSettingsView: View {
                 }
                 Text(viewModel.title)
                     .padding(.leading, 10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
             }
             .padding(.bottom, 5)
+            .padding(.top, 5)
+            .frame(height: 40, alignment: .center)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                viewModel.onTapHandler(viewModel.type)
+            }
         }
         .scrollDisabled(true)
-        .padding(.top, -20)
     }
 }
 
 #Preview {
-    RMSettingsView(viewModel: .init(cellViewModels: RMSettingsOption.allCases.compactMap { RMSettingsCellViewViewModel(type: $0) }))
+    RMSettingsView(viewModel: .init(cellViewModels: RMSettingsOption.allCases.compactMap { RMSettingsCellViewViewModel(type: $0, onTapHandler: {_ in }) }))
 }
