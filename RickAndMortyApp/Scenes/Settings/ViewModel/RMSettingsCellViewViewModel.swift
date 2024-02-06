@@ -22,7 +22,7 @@ struct RMSettingsCellViewViewModel: Identifiable, Hashable {
         type.displayImage
     }
     
-    public var imageContainerColoer: UIColor {
+    public var imageContainerColor: UIColor {
         type.iconContainerColor
     }
     
